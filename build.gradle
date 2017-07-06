@@ -5,6 +5,7 @@ buildscript {
     repositories {
         google()
         jcenter()
+        maven { url 'http://kamedon.github.com/Validation/repository' }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0-alpha5'
@@ -22,6 +23,7 @@ allprojects {
         maven {
             url 'http://dl.bintray.com/ngsw-taro/maven'
         }
+        maven { url 'http://kamedon.github.com/Validation/repository' }
     }
 }
 
