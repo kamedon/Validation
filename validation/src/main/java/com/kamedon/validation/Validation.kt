@@ -1,7 +1,7 @@
 package com.kamedon.validation
 
 /**
- * Created by kamei.hidetoshi on 2017/07/06.
+ * Created by Kamedon
  */
 class Validation<in T>(val validations: List<Pair<T.() -> Boolean, String>>) {
 
