@@ -16,6 +16,8 @@ val errorMessages =validation.validate(User("", 0))
 //errorMessages: 2 message
 ```
 
+see: [ValidationTest.kt](https://github.com/kamedon/Validation/blob/master/validation/src/test/java/com/kamedon/validation/ValidationTest.kt)
+
 ## Installation
 
 ```
