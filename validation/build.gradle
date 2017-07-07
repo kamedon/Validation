@@ -32,7 +32,7 @@ dependencies {
     implementation 'com.android.support:appcompat-v7:26.0.0-beta2'
     testImplementation 'junit:junit:4.12'
     testImplementation 'com.taroid.knit:knit:0.1.2'
-    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
+    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
 }
 
 
@@ -44,7 +44,7 @@ uploadArchives {
     repositories {
         mavenDeployer {
             repository url: "file://${repo.absolutePath}"
-            pom.version = '0.1.0'
+            pom.version = '0.1.1'
             pom.groupId = 'com.kamedon'
             pom.artifactId = 'kotlin-validation'
         }
