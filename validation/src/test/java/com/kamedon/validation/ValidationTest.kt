@@ -20,13 +20,11 @@ class ValidationTest {
             }
             "age"{
                 be { age >= 20 } not "age: Over 20 years old"
-                be { age >= 30 } not "age: Over 20 years old"
             }
         }
-        print(User("kamedon", 30, validation).validate())
-        print(User("", 0, validation).validate())
-        val errors = User("kamedon", 30, validation)
-//        User("", 20, validation).validate().size.should.be(1)
-//        User("", 0, validation).validate().size.should.be(2)
+        User("kamedon", 30, validation).validate().size.should.be(0)
+        User("hoge", 20, validation).validate().size.should.be(1)
+        User("", 0, validation).validate().size.should.be(2)
+        // {name=[name: 5 characters or more], age=[age: Over 20 years old]}
     }
 }
