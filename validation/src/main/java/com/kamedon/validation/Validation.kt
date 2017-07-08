@@ -3,7 +3,7 @@ package com.kamedon.validation
 /**
  * Created by Kamedon
  */
-class Validation<in T>(val validations: List<Pair<T.() -> Boolean, String>>) {
+class Validation<T>(val validations: Map<String, ChildValidation<T>>) {
 
     companion object {
         operator fun <T> invoke(init: ValidationBuilder<T>.() -> Unit): Validation<T> {
@@ -12,21 +12,34 @@ class Validation<in T>(val validations: List<Pair<T.() -> Boolean, String>>) {
         }
     }
 
-    fun validate(value: T) = validations.filter { !it.first.invoke(value) }.map { it.second }
+    fun validate(value: T): Map<String, List<String>> {
+        val messages = mutableMapOf<String, List<String>>()
+        validations.forEach { map ->
+            val errors = map.value.validations.filter { !it.first.invoke(value) }.map { it.second }.takeIf { it.isNotEmpty() }
+            errors?.also {
+                messages.put(map.key, it)
+            }
+        }
+        return messages
+    }
 
 }
 
 class ValidationBuilder<T> {
-    var validations: MutableList<Pair<T.() -> Boolean, String>> = mutableListOf()
+    var childValidations: MutableMap<String, ChildValidation<T>> = mutableMapOf()
 
-
-    fun <R> of(field: T.() -> R) = field
-
-    inline infix fun <R> (T.() -> R).be(crossinline validate: R.() -> Boolean): T.() -> Boolean {
-        return { ->
-            validate(this@be.invoke(this))
-        }
+    operator fun String.invoke(init: ChildValidation<T>.() -> Unit) {
+        childValidations.put(this, ChildValidation<T>().apply(init))
     }
+
+    fun build(): Validation<T> {
+        return Validation(childValidations)
+    }
+
+}
+
+class ChildValidation<T> {
+    var validations: MutableList<Pair<T.() -> Boolean, String>> = mutableListOf()
 
     fun be(validate: T.() -> Boolean) = validate
 
@@ -34,12 +47,5 @@ class ValidationBuilder<T> {
         validations.add(this to error)
     }
 
-    fun build(): Validation<T> {
-        return Validation(validations)
-    }
-
 }
-
-
-
 

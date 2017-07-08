@@ -26,8 +26,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         val validation = Validation<User> {
-            be { !name.isEmpty() } not "name: 5 characters or more"
-            be { age >= 20 } not "age: Over 20 years old"
+            "name"{
+                be { !name.isEmpty() } not "name: 5 characters or more"
+            }
+            "age"{
+                be { age >= 20 } not "age: Over 20 years old"
+            }
         }
 
         registerBtn.setOnClickListener {
