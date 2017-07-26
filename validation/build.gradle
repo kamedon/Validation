@@ -44,7 +44,7 @@ uploadArchives {
     repositories {
         mavenDeployer {
             repository url: "file://${repo.absolutePath}"
-            pom.version = '0.2.0'
+            pom.version = '0.2.1'
             pom.groupId = 'com.kamedon'
             pom.artifactId = 'kotlin-validation'
         }
