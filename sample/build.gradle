@@ -34,7 +34,7 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$kotlin_version"
-    implementation 'com.kamedon:kotlin-validation:0.2.0'
+    implementation 'com.kamedon:kotlin-validation:0.3.0'
 }
 repositories {
     mavenCentral()
