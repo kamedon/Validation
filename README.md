@@ -1,5 +1,7 @@
 # Kotlin Validation
 
+[![Build Status](https://www.bitrise.io/app/52bf5677c2ea2255/status.svg?token=VefnKnVA0lwrTocWOGkTSg&branch=master)](https://www.bitrise.io/app/52bf5677c2ea2255)
+
 ## Usage
 
 ```
