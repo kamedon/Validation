@@ -1,7 +1,7 @@
 // Top-level build file where you can add configuration options common to all sub-projects/modules.
 
 buildscript {
-    ext.kotlin_version = '1.2.21'
+    ext.kotlin_version = '1.2.30'
     repositories {
         google()
         jcenter()
@@ -24,7 +24,6 @@ allprojects {
             url 'http://dl.bintray.com/ngsw-taro/maven'
         }
         maven { url 'http://kamedon.github.com/Validation/repository' }
-        maven { url 'http://dl.bintray.com/kotlin/kotlin-eap-1.2' }
     }
 }
 
