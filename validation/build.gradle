@@ -1,7 +1,6 @@
-group 'com.kamedon'
-version '0.4.0'
-
 apply plugin: 'kotlin'
+apply plugin: 'com.jfrog.bintray'
+
 
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
@@ -12,22 +11,51 @@ dependencies {
 }
 
 
-def repo = new File(rootDir, "repository")
+bintray {
+    def propertiesFile = rootProject.file('local.properties')
+    if (propertiesFile.exists()) {
+        Properties properties = new Properties()
+        properties.load(propertiesFile.newDataInputStream())
+        user = properties.getProperty('bintray.user')
+        key = properties.getProperty('bintray.apiKey')
+    } else {
+        user = System.getenv('BINTRAY_USER')
+        key = System.getenv('BINTRAY_API_KEY')
+    }
+    configurations = ['archives']
 
-apply plugin: 'maven'
+    pkg {
+        repo = 'maven'
+        name = 'kotlin-Validation'
+        desc = 'Kotlin Validation Library'
 
+        userOrg = 'kamedon'
+        licenses = ['Apache-2.0']
+        websiteUrl = 'https://github.com/kamedon/Validation'
+        vcsUrl = 'https://github.com/kamedon/Validation.git'
+        githubRepo = 'kamedon/Validation'
+        githubReleaseNotesFile = 'README.md'
 
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository url: "file://${repo.absolutePath}"
-            pom.version = '0.3.0'
-            pom.groupId = 'com.kamedon'
-            pom.artifactId = 'kotlin-validation'
+        publicDownloadNumbers = true
+
+        version {
+            name = '0.4.0'
+            released  = new Date()
+            vcsTag = '0.4.0'
         }
+    }
+
+    dryRun = false
+    publish = true
+    override = true
+
+    version {
+        name = '0.4.0'
+        released = new Date().format("yyyy-MM-dd'T'HH:mm:ss.SSSZZ")
+    }
+
+    filesSpec {
+        from 'build/libs'
     }
 }
 
-repositories {
-    mavenCentral()
-}
