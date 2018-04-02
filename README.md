@@ -33,7 +33,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.kamedon:kotlin-validation:0.3.0'
+    implementation 'com.kamedon:kotlin-validation:0.4.0'
 }
 ```
 

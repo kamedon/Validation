@@ -35,7 +35,13 @@ class MainActivity : AppCompatActivity() {
         }
 
         registerBtn.setOnClickListener {
-            val user = User(nameEdit.text?.toString() ?: "", ageEdit.text?.toString()?.toInt() ?: 0, validation)
+            val ageText = ageEdit.text?.toString() ?: ""
+            val age = if (ageText.isBlank()) {
+                0
+            } else {
+                ageText.toInt()
+            }
+            val user = User(nameEdit.text?.toString() ?: "", age, validation)
             val errors = user.validate()
             if (errors.isEmpty()) {
                 Toast.makeText(applicationContext, "valid data!", Toast.LENGTH_SHORT).show()
