@@ -20,7 +20,6 @@ allprojects {
         google()
         jcenter()
         mavenCentral()
-        maven { url 'http://dl.bintray.com/ngsw-taro/maven' }
         maven { url 'http://kamedon.github.com/Validation/repository' }
     }
 }
