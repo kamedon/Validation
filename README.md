@@ -12,18 +12,11 @@ class ValidationTest {
     val validation = Validation<User> {
         "name"{
             be { name.length >= 5 } not "name: 5 characters or more"
+            be { name.length <= 10 } not "name: 10 characters or less"
         }
         "age"{
             be { age >= 20 } not "age: Over 20 years old"
         }
-    }
-
-    @Test
-    fun validDataTest() {
-        val user = User("kamedon", 30)
-        val expected = 0
-        val actual = validation.validate(user).size
-        Assert.assertEquals(expected, actual)
     }
 
     @Test
@@ -37,7 +30,6 @@ class ValidationTest {
         Assert.assertEquals(errors["age"]!![0], "age: Over 20 years old")
         Assert.assertEquals(errors.size, 2)
     }
-
 }
 ```
 
