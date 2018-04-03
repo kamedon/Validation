@@ -18,6 +18,13 @@ class ValidationTest {
         }
     }
 
+    @Test
+    fun validDataTest() {
+        val user = User("kamedon", 30)
+        val expected = 0
+        val actual = validation.validate(user).size
+        Assert.assertEquals(expected, actual)
+    }
 
     @Test
     fun invalidNameAndAgeTest() {
