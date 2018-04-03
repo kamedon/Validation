@@ -7,20 +7,31 @@
 ```
 class User(val name: String, val age: Int)
 
-val validation = Validation<User> {
-    "name"{
-        be { name.length >= 5 } not "name: 5 characters or more"
-        be { name.length <= 16 } not "name: 16 characters or less"
-    }
-    "age"{
-        be { age >= 20 } not "age: Over 20 years old"
-    }
-}
+class ValidationTest {
 
-User("kamedon", 30, validation).validate().size.should.be(0)
-User("hoge", 20, validation).validate().size.should.be(1)
-User("", 0, validation).validate().size.should.be(2)
-// {name=[name: 5 characters or more], age=[age: Over 20 years old]}
+    val validation = Validation<User> {
+        "name"{
+            be { name.length >= 5 } not "name: 5 characters or more"
+        }
+        "age"{
+            be { age >= 20 } not "age: Over 20 years old"
+        }
+    }
+
+
+    @Test
+    fun invalidNameAndAgeTest() {
+        val user = User("k", 0)
+
+        // {name=[name: 5 characters or more], age=[age: Over 20 years old]}
+        val errors = validation.validate(user)
+
+        Assert.assertEquals(errors["name"]!![0], "name: 5 characters or more")
+        Assert.assertEquals(errors["age"]!![0], "age: Over 20 years old")
+        Assert.assertEquals(errors.size, 2)
+    }
+
+}
 ```
 
 see: [ValidationTest.kt](https://github.com/kamedon/Validation/blob/master/validation/src/test/java/com/kamedon/validation/ValidationTest.kt)
