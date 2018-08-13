@@ -86,7 +86,6 @@ class ValidationsTest {
                 "name"{
                     be { name.isNotBlank() } not "name is not blank"
                 }
-
             }
         }
 

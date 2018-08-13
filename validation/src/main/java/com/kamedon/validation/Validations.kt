@@ -4,9 +4,7 @@ object Validations {
     val map: MutableMap<String, Validation<out Any?>> = HashMap()
 
     fun <T> key(clazz: Class<T>): String {
-        return "${clazz.`package`.name}.${clazz.simpleName!!}".apply {
-            println(this)
-        }
+        return "${clazz.`package`.name}.${clazz.simpleName!!}"
     }
 
     inline fun <reified T> define(init: ValidationBuilder<T>.() -> Unit) {
