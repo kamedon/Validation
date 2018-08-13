@@ -1,11 +1,12 @@
 package com.kamedon.sample
 
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import com.kamedon.validation.Validation
+import com.kamedon.validation.Validations
+import com.kamedon.validation.valid
 
 class MainActivity : AppCompatActivity() {
 
@@ -25,12 +26,14 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val validation = Validation<User> {
-            "name"{
-                be { !name.isEmpty() } not "name: 5 characters or more"
-            }
-            "age"{
-                be { age >= 20 } not "age: Over 20 years old"
+        Validations {
+            define<User> {
+                "name"{
+                    be { !name.isEmpty() } not "name: 5 characters or more"
+                }
+                "age"{
+                    be { age >= 20 } not "age: Over 20 years old"
+                }
             }
         }
 
@@ -41,8 +44,8 @@ class MainActivity : AppCompatActivity() {
             } else {
                 ageText.toInt()
             }
-            val user = User(nameEdit.text?.toString() ?: "", age, validation)
-            val errors = user.validate()
+            val user = User(nameEdit.text?.toString() ?: "", age)
+            val errors = user.valid()
             if (errors.isEmpty()) {
                 Toast.makeText(applicationContext, "valid data!", Toast.LENGTH_SHORT).show()
             } else {
@@ -56,6 +59,4 @@ class MainActivity : AppCompatActivity() {
 }
 
 
-class User(val name: String, val age: Int, private val validation: Validation<User>) {
-    fun validate() = validation.validate(this)
-}
+class User(val name: String, val age: Int)
