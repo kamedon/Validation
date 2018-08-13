@@ -60,7 +60,7 @@ Validations {
 val user = User("kamedon", 0)
 
 // {age=[age: Over 20 years old]}
-val errors = user.vaild()
+val errors = user.vaildate()
 
 ```
 

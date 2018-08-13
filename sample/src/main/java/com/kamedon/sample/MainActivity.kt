@@ -6,7 +6,7 @@ import android.view.View
 import android.widget.EditText
 import android.widget.Toast
 import com.kamedon.validation.Validations
-import com.kamedon.validation.valid
+import com.kamedon.validation.validate
 
 class MainActivity : AppCompatActivity() {
 
@@ -45,7 +45,7 @@ class MainActivity : AppCompatActivity() {
                 ageText.toInt()
             }
             val user = User(nameEdit.text?.toString() ?: "", age)
-            val errors = user.valid()
+            val errors = user.validate()
             if (errors.isEmpty()) {
                 Toast.makeText(applicationContext, "valid data!", Toast.LENGTH_SHORT).show()
             } else {
