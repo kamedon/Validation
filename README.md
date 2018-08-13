@@ -2,7 +2,7 @@
 
 [![Build Status](https://www.bitrise.io/app/52bf5677c2ea2255/status.svg?token=VefnKnVA0lwrTocWOGkTSg&branch=master)](https://www.bitrise.io/app/52bf5677c2ea2255)
 
-## Usage
+## Usage: Single Entity Define
 
 ```
 class User(val name: String, val age: Int)
@@ -35,6 +35,38 @@ class ValidationTest {
 
 see: [ValidationTest.kt](https://github.com/kamedon/Validation/blob/master/validation/src/test/java/com/kamedon/validation/ValidationTest.kt)
 
+## Usage: All Entity Define
+
+define ALL Entity Validation. add extension **vaild()** to Entity.
+
+```
+Validations {
+    define<User> {
+        "name"{
+            be { name.length >= 5 } not "name: 5 characters or more"
+            be { name.length <= 10 } not "name: 10 characters or less"
+        }
+        "age"{
+            be { age >= 20 } not "age: Over 20 years old"
+        }
+    }
+    define<Account> {
+        "name"{
+            be { name.isNotBlank() } not "name is not blank"
+        }
+    }
+}
+
+val user = User("kamedon", 0)
+
+// {age=[age: Over 20 years old]}
+val errors = user.vaild()
+
+```
+
+see: [ValidationsTest.kt](https://github.com/kamedon/Validation/blob/master/validation/src/test/java/com/kamedon/validation/ValidationsTest.kt)
+
+
 ## Installation
 
 ```
@@ -43,7 +75,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.kamedon:kotlin-validation:0.4.0'
+    implementation 'com.kamedon:kotlin-validation:0.5.0'
 }
 ```
 
