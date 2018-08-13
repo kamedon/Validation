@@ -4,6 +4,11 @@ import org.junit.Assert
 import org.junit.Test
 
 class ValidationsTest {
+    class User(val name: String, val age: Int)
+    class Account(val name: String) {
+        val valid by ValidationProperty()
+    }
+
     @Test
     fun syntaxText() {
         Validations(

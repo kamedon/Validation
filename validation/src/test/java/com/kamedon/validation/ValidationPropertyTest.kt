@@ -3,11 +3,11 @@ package com.kamedon.validation
 import org.junit.Assert
 import org.junit.Test
 
-class Account(val name: String) {
-    val valid by ValidationProperty()
-}
 
 class ValidationPropertyTest {
+    class Account(val name: String) {
+        val valid by ValidationProperty()
+    }
 
     @Test
     fun syntaxText() {
@@ -16,5 +16,4 @@ class ValidationPropertyTest {
         val actual = account.valid
         Assert.assertEquals(expected, actual)
     }
-
 }

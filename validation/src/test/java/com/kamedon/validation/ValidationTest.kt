@@ -6,9 +6,9 @@ import org.junit.Test
 /**
  * Created by Kamedon
  */
-class User(val name: String, val age: Int)
 
 class ValidationTest {
+    class User(val name: String, val age: Int)
 
     val validation = Validation<User> {
         "name"{
