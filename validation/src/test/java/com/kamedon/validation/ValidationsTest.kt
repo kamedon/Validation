@@ -114,7 +114,7 @@ class ValidationsTest {
         }
 
         val user = User("kamedon", 0)
-        val errors = user.vaild()
+        val errors = user.valid()
         Assert.assertEquals(1, errors.size)
     }
 
