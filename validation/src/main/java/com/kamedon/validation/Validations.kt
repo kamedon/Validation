@@ -24,7 +24,7 @@ object Validations {
 
 }
 
-inline fun <reified T> T.valid(): Map<String, List<String>> {
+inline fun <reified T> T.validate(): Map<String, List<String>> {
     val v = Validations.get<T>()
     return v.validate(this)
 }
