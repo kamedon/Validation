@@ -1,12 +1,12 @@
 package com.kamedon.validation
 
-import kotlin.reflect.KClass
-
 object Validations {
     val map: MutableMap<String, Validation<out Any?>> = HashMap()
 
     fun <T> key(clazz: Class<T>): String {
-        return clazz.simpleName!!
+        return "${clazz.`package`.name}.${clazz.simpleName!!}".apply {
+            println(this)
+        }
     }
 
     inline fun <reified T> define(init: ValidationBuilder<T>.() -> Unit) {
@@ -18,8 +18,8 @@ object Validations {
 
     operator fun invoke(init: Validations.() -> Unit) = apply(init)
 
-    fun <T : Any> get(clazz: KClass<T>): Validation<T>? {
-        val validation = map[key(clazz::class.java)]
+    inline fun <reified T> get(): Validation<T>? {
+        val validation = map[key(T::class.java)]
                 ?: throw IllegalArgumentException("not found validation")
         return validation as Validation<T>
     }

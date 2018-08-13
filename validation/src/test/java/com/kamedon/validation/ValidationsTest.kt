@@ -43,7 +43,7 @@ class ValidationsTest {
         }
 
         val user = User("kamedon", 30)
-        val validation = Validations.get(User::class)
+        val validation = Validations.get<User>()
         Assert.assertEquals(true, validation != null)
         val valid = (validation as Validation<User>).validate(user)
         Assert.assertEquals(0, valid.size)
