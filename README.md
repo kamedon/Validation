@@ -37,9 +37,12 @@ see: [ValidationTest.kt](https://github.com/kamedon/Validation/blob/master/valid
 
 ## Usage: All Entity Define
 
-define ALL Entity Validation. add extension **vaild()** to Entity.
+define ALL Entity Validation. add extension **validate()** to Entity.
 
 ```
+class User(val name: String val age: Int)
+class Account(val name: String)
+
 Validations {
     define<User> {
         "name"{
