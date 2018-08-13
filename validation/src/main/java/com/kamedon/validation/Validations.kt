@@ -16,10 +16,15 @@ object Validations {
 
     operator fun invoke(init: Validations.() -> Unit) = apply(init)
 
-    inline fun <reified T> get(): Validation<T>? {
+    inline fun <reified T> get(): Validation<T> {
         val validation = map[key(T::class.java)]
                 ?: throw IllegalArgumentException("not found validation")
         return validation as Validation<T>
     }
 
+}
+
+inline fun <reified T> T.vaild(): Map<String, List<String>> {
+    val v = Validations.get<T>()
+    return v.validate(this)
 }
