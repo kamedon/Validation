@@ -16,7 +16,9 @@ class ValidationTest {
             be { name.length <= 10 } not "name: 10 characters or less"
         }
         "age"{
-            be { age >= 20 } not "age: Over 20 years old"
+            be { age >= 20 } not error message { "age: Over 20 years old" }
+            be { age <= 150 } not with callback ("age: Over 150 years old"){
+            }
         }
     }
 
@@ -49,13 +51,39 @@ class ValidationTest {
     }
 
     @Test
-    fun invalidAgeTest() {
+    fun invalidLessAgeTest() {
         val user = User("kamedon", 5)
         val errors = validation.validate(user)
 
         val expected = "age: Over 20 years old"
         val actual = errors["age"]!![0]
         Assert.assertEquals(expected, actual)
+    }
+
+    @Test
+    fun invalidOverAgeTest() {
+        val user = User("kamedon", 1000)
+        var callback = false
+        val v = Validation<User> {
+            "name"{
+                be { name.length >= 5 } not "name: 5 characters or more"
+                be { name.length <= 10 } not "name: 10 characters or less"
+            }
+            "age"{
+                be { age >= 20 } not error message { "age: Over 20 years old" }
+                be { age <= 150 } not with callback ("age: Over 150 years old"){
+                    callback = true
+                }
+            }
+        }
+        val errors = v.validate(user)
+
+        var expectedCallback = true
+        val expected = "age: Over 150 years old"
+        val actual = errors["age"]!![0]
+        Assert.assertEquals(expected, actual)
+
+        Assert.assertEquals(expectedCallback, callback)
     }
 
 
