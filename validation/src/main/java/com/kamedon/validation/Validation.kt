@@ -42,8 +42,7 @@ class ValidationBuilder<T> {
 }
 
 class ChildValidation<T> {
-    var validations: MutableList<Validable<T>> = mutableListOf()
-
+    val validations: MutableList<Validable<T>> = mutableListOf()
     fun be(validate: T.() -> Boolean) = validate
 
     infix fun (T.() -> Boolean).not(error: String) {
