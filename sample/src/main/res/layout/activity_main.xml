@@ -18,7 +18,8 @@
             android:id="@+id/userNameEdit"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="user name" />
+            android:hint="user name"
+            android:textSize="28sp" />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -30,11 +31,12 @@
 
         <EditText
             android:id="@+id/userAgeEdit"
-            android:inputType="number"
-            android:text="0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="user age" />
+            android:hint="user age"
+            android:inputType="number"
+            android:text="0"
+            android:textSize="28sp" />
     </android.support.design.widget.TextInputLayout>
 
     <Button
@@ -42,6 +44,16 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="register" />
+        android:text="register"
+        android:textSize="28sp" />
+
+    <EditText
+        android:id="@+id/user"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="user age"
+        android:inputType="number"
+        android:text="0"
+        android:textSize="32sp" />
 
 </LinearLayout>
