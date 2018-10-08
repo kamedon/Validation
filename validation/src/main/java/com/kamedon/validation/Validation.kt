@@ -15,12 +15,18 @@ class Validation<T>(val validations: Map<String, ChildValidation<T>>) {
     fun validate(value: T): Map<String, List<String>> {
         val messages = mutableMapOf<String, List<String>>()
         validations.forEach { map ->
-            val errors = map.value.validations.asSequence().filter { !it.validate.invoke(value) }.map {
-                it.callback?.invoke()
-                it.message
-            }.toList().takeIf { it.isNotEmpty() }
-            errors?.also {
-                messages.put(map.key, it)
+            val errors = map.value.validations.asSequence()
+                    .filter { !it.validate.invoke(value) }
+                    .onEach {
+                        it.callback?.invoke()
+                    }
+                    .map {
+                        it.message
+                    }
+                    .filter { it.isNotEmpty() }
+                    .toList()
+            if (errors.isNotEmpty()) {
+                messages.put(map.key, errors)
             }
         }
         return messages
